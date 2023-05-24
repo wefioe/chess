@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner input=new Scanner(System.in);
+        //Scanner input=new Scanner(System.in);
         SwingUtilities.invokeLater(() -> {
             ChessGameFrame mainFrame = new ChessGameFrame(1100, 810);
             Chessboard board=new Chessboard();
