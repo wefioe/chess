@@ -15,10 +15,7 @@ import chess.WolfChessComponent;
 import view.ChessGameFrame;
 import view.ChessboardComponent;
 
-import javax.swing.*;
 import java.io.*;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * Controller is the connection between model and view,
@@ -706,16 +703,16 @@ public class GameController implements GameListener {
     }
     public void save()
     {
-        save e=new save();
+        Savetxt o=new Savetxt();
         for(Step oo:changshu.sav){
-            e.sav.addLast(oo);
+            o.sav.addLast(new Step(oo.getFrom(),oo.getTo(),oo.getCurrentPlayer(),oo.getTurnCount(),oo.getBeeaten()));
         }
         try
         {
             FileOutputStream fileOut =
-                    new FileOutputStream("/sav.txt");
+                    new FileOutputStream("/java/sav.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(e);
+            out.writeObject(o);
             out.close();
             fileOut.close();
             System.out.printf("Serialized data is saved in /sav.txt");
@@ -724,9 +721,50 @@ public class GameController implements GameListener {
             i.printStackTrace();
         }
     }
+    Savetxt e;
     public void load()
     {
-        save e = null;
+        e =new Savetxt();
+        try
+        {
+            FileInputStream fileIn = new FileInputStream("/java/sav.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Savetxt ee = (Savetxt) in.readObject();
+            for(Step oo:ee.sav){
+                Step kk=new Step(oo.getFrom(),oo.getTo(),oo.getCurrentPlayer(),oo.getTurnCount(),oo.getBeeaten());
+                e.sav.addLast(kk);
+            }
+            in.close();
+            fileIn.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+            return;
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+        System.out.println("load finished");
+        System.out.println(e);
+        initChessboard();
+        /*for(Step oo:ee.sav){
+            String s=changshu.mapcell[oo.getTo().getRow()][oo.getTo().getCol()];
+            if(s=="Elephant")LOADMOVEElephant(oo.getFrom(),oo.getTo());
+            else if(s=="Cat")LOADMOVECat(oo.getFrom(),oo.getTo());
+            else if(s=="Dog")LOADMOVEDog(oo.getFrom(),oo.getTo());
+            else if(s=="Leopard")LOADMOVELeopard(oo.getFrom(),oo.getTo());
+            else if(s=="Lion")LOADMOVELion(oo.getFrom(),oo.getTo());
+            else if(s=="Rat")LOADMOVERat(oo.getFrom(),oo.getTo());
+            else if(s=="Tiger")LOADMOVETiger(oo.getFrom(),oo.getTo());
+            else if(s=="Wolf")LOADMOVEWolf(oo.getFrom(),oo.getTo());
+            else LOADMOVE(oo.getFrom(),oo.getTo());
+        }*/
+    }
+    public void slowload()
+    {
+        /*save e = null;
         try
         {
             FileInputStream fileIn = new FileInputStream("/sav.txt");
@@ -746,7 +784,31 @@ public class GameController implements GameListener {
         }
         System.out.println("load finished");
         System.out.println(e);
-        initChessboard();
+        initChessboard();*/
+        //for(Step oo:e.sav){
+        if(e.sav.size()==0)return;
+        Step oo=e.sav.getFirst();
+        e.sav.removeFirst();
+            String s=changshu.mapcell[oo.getTo().getRow()][oo.getTo().getCol()];
+            if(s=="Elephant")LOADMOVEElephant(oo.getFrom(),oo.getTo());
+            else if(s=="Cat")LOADMOVECat(oo.getFrom(),oo.getTo());
+            else if(s=="Dog")LOADMOVEDog(oo.getFrom(),oo.getTo());
+            else if(s=="Leopard")LOADMOVELeopard(oo.getFrom(),oo.getTo());
+            else if(s=="Lion")LOADMOVELion(oo.getFrom(),oo.getTo());
+            else if(s=="Rat")LOADMOVERat(oo.getFrom(),oo.getTo());
+            else if(s=="Tiger")LOADMOVETiger(oo.getFrom(),oo.getTo());
+            else if(s=="Wolf")LOADMOVEWolf(oo.getFrom(),oo.getTo());
+            else LOADMOVE(oo.getFrom(),oo.getTo());
+            //view.repaint();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        //}
+    }
+    public void quickload()
+    {
         for(Step oo:e.sav){
             String s=changshu.mapcell[oo.getTo().getRow()][oo.getTo().getCol()];
             if(s=="Elephant")LOADMOVEElephant(oo.getFrom(),oo.getTo());

@@ -4,9 +4,8 @@ import model.ChessPiece;
 import model.ChessboardPoint;
 import model.PlayerColor;
 
-import java.io.Serializable;
 
-public class Step implements Serializable {
+public class Step implements java.io.Serializable{
     private ChessboardPoint from;
     private ChessboardPoint to;
     private PlayerColor currentPlayer;

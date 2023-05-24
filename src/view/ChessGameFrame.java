@@ -31,8 +31,9 @@ public class ChessGameFrame extends JFrame {
 
         addChessboard();
         addLabel();
-        addHelloButton();
+        addslowloadButton();
         adddarkbackButton();
+        addquickloadButton();
         addinitChessboardButton();
         addsaveButton();
         addloadButton();
@@ -70,14 +71,14 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
      */
 
-    private void addHelloButton() {
+    /*private void addHelloButton() {
         JButton button = new JButton("Show Hello Here");
         button.addActionListener((e) -> JOptionPane.showMessageDialog(this, "Hello, world!"));
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
-    }
+    }*/
     private void adddarkbackButton() {
         JButton button = new JButton("drawback");
         button.addActionListener((e) -> gameController.drawback());
@@ -89,7 +90,7 @@ public class ChessGameFrame extends JFrame {
     private void addinitChessboardButton() {
         JButton button = new JButton("initChessboard");
         button.addActionListener((e) -> gameController.initChessboard());
-        button.setLocation(HEIGTH, HEIGTH / 10 + 240 );
+        button.setLocation(HEIGTH, HEIGTH / 10 + 120 );
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
@@ -97,7 +98,7 @@ public class ChessGameFrame extends JFrame {
     private void addsaveButton() {
         JButton button = new JButton("save");
         button.addActionListener((e) -> gameController.save());
-        button.setLocation(HEIGTH, HEIGTH / 10 + 360 );
+        button.setLocation(HEIGTH, HEIGTH / 10 + 240 );
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
@@ -105,12 +106,28 @@ public class ChessGameFrame extends JFrame {
     private void addloadButton() {
         JButton button = new JButton("load");
         button.addActionListener((e) -> gameController.load());
+        button.setLocation(HEIGTH, HEIGTH / 10 + 360 );
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+    }
+    private void addslowloadButton() {
+        JButton button = new JButton("slowload");
+        button.addActionListener((e) -> gameController.slowload());
         button.setLocation(HEIGTH, HEIGTH / 10 + 480 );
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
-//    private void addLoadButton() {
+    private void addquickloadButton() {
+        JButton button = new JButton("quickload");
+        button.addActionListener((e) -> gameController.quickload());
+        button.setLocation(HEIGTH, HEIGTH / 10 + 600 );
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+    }
+    //    private void addLoadButton() {
 //        JButton button = new JButton("Load");
 //        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
 //        button.setSize(200, 60);
